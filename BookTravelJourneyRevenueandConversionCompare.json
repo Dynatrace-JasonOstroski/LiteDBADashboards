@@ -1,0 +1,724 @@
+{
+  "metadata": {
+    "configurationVersions": [
+      3
+    ],
+    "clusterVersion": "1.190.86.20200331-160833"
+  },
+  "id": "bbbbbbbb-0001-0001-0001-000000000018",
+  "dashboardMetadata": {
+    "name": "🔎 Book Travel Journey Revenue and Conversion Compare",
+    "shared": true,
+    "owner": "jason.ostroski@dynatrace.com",
+    "sharingDetails": {
+      "linkShared": true,
+      "published": false
+    },
+    "dashboardFilter": {
+      "timeframe": "l_2_HOURS",
+      "managementZone": null
+    }
+  },
+  "tiles": [
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 114,
+        "left": 38,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "Last 2 hours",
+        "managementZone": null
+      },
+      "customName": "Revenue",
+      "query": "select sum(usersession.doubleProperties.revenue) as \"Revenue\" FROM usersession where useraction.application=\"EasyTravel\"  and (useraction.name=\"loading of page /\") AND (useraction.name=\"click on login\") AND (useraction.name=\"click on search\") AND (useraction.name=\"loading of page /orange-booking-review.jsf\") AND (useraction.name=\"loading of page /orange-booking-payment.jsf\") AND (useraction.name=\"loading of page /orange-booking-finish.jsf\")",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 266,
+        "left": 266,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "customName": "Lost Revenue",
+      "query": "select sum(usersession.doubleProperties.revenue) as \"Lost Revenue\" FROM usersession where useraction.application=\"EasyTravel\"  and not ((useraction.name=\"loading of page /orange-booking-finish.jsf\"))",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 266,
+        "left": 38,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "Last 2 hours",
+        "managementZone": null
+      },
+      "customName": "Risk Revenue",
+      "query": "select sum(usersession.doubleProperties.revenue) as \"Risk Revenue\" FROM usersession where useraction.application=\"EasyTravel\"  and (useraction.name=\"loading of page /\") AND (useraction.name=\"click on login\") AND (useraction.name=\"click on search\") AND (useraction.name=\"loading of page /orange-booking-review.jsf\") AND (useraction.name=\"loading of page /orange-booking-payment.jsf\") AND (useraction.name=\"loading of page /orange-booking-finish.jsf\") and (userExperienceScore =\"TOLERATED\" or userExperienceScore =\"FRUSTRATED\" or userExperienceScore =\"UNDEFINED\")",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "DTAQL",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 114,
+        "left": 760,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "Last 2 hours",
+        "managementZone": null
+      },
+      "customName": "Satisfied Users",
+      "query": "select count(usersessionid) as \"Conversions\" from usersession where useraction.application=\"EasyTravel\"  and (useraction.name=\"loading of page /orange-booking-finish.jsf\") and userExperienceScore=\"SATISFIED\" and usersession.doubleProperties.revenue>0",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "DTAQL",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 114,
+        "left": 988,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "Last 2 hours",
+        "managementZone": null
+      },
+      "customName": "Tolerated Users",
+      "query": "select count(usersessionid) as \"Conversions\" from usersession where useraction.application=\"EasyTravel\"  and (useraction.name=\"loading of page /orange-booking-finish.jsf\") and userExperienceScore=\"TOLERATED\" and usersession.doubleProperties.revenue>0",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "DTAQL",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 114,
+        "left": 1216,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "Last 2 hours",
+        "managementZone": null
+      },
+      "customName": "Frustrated Users",
+      "query": "select count(usersessionid) as \"Conversions\" from usersession where useraction.application=\"EasyTravel\"  and (useraction.name=\"loading of page /orange-booking-finish.jsf\") and userExperienceScore=\"FRUSTRATED\" and usersession.doubleProperties.revenue>0",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "DTAQL",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 266,
+        "left": 760,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "Last 2 hours",
+        "managementZone": null
+      },
+      "customName": "Satisfied Users",
+      "query": "select count(usersessionid) as \"Abandons\" from usersession where useraction.application=\"EasyTravel\"  and (useraction.name=\"loading of page /\") and not (useraction.name=\"loading of page /orange-booking-finish.jsf\") and userExperienceScore=\"SATISFIED\" and usersession.doubleProperties.revenue>0",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "DTAQL",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 266,
+        "left": 988,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "Last 2 hours",
+        "managementZone": null
+      },
+      "customName": "Tolerated Users",
+      "query": "select count(usersessionid) as \"Abandons\" from usersession where useraction.application=\"EasyTravel\"  and (useraction.name=\"loading of page /\") and not (useraction.name=\"loading of page /orange-booking-finish.jsf\") and userExperienceScore=\"TOLERATED\" and usersession.doubleProperties.revenue>0",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "DTAQL",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 266,
+        "left": 1216,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "Last 2 hours",
+        "managementZone": null
+      },
+      "customName": "Frustrated Users",
+      "query": "select count(usersessionid) as \"Abandons\" from usersession where useraction.application=\"EasyTravel\"  and (useraction.name=\"loading of page /\") and not (useraction.name=\"loading of page /orange-booking-finish.jsf\") and userExperienceScore=\"FRUSTRATED\" and usersession.doubleProperties.revenue>0",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 114,
+        "left": 1482,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "Last 2 hours",
+        "managementZone": null
+      },
+      "customName": "Duration",
+      "query": "select avg(useraction.duration) as \"Duration\" from useraction where useraction.application=\"EasyTravel\"",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 266,
+        "left": 1482,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "Last 2 hours",
+        "managementZone": null
+      },
+      "customName": "Errors",
+      "query": "select sum(useraction.errorCount) as \"Errors\" from useraction where useraction.application=\"EasyTravel\"",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "Markdown",
+      "tileType": "MARKDOWN",
+      "configured": true,
+      "bounds": {
+        "top": 0,
+        "left": 1672,
+        "width": 152,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "markdown": "## [⇦](#dashboard;id=bbbbbbbb-0001-0001-0001-000000000000)"
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 570,
+        "left": 38,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "-24h-2h to -24h",
+        "managementZone": null
+      },
+      "customName": "Revenue",
+      "query": "select sum(usersession.doubleProperties.revenue) as \"Revenue\" FROM usersession where useraction.application=\"EasyTravel\" and useraction.name=\"click on login\"",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "DTAQL",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 570,
+        "left": 760,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "-24h-2h to -24h",
+        "managementZone": null
+      },
+      "customName": "Satisfied Users",
+      "query": "select count(usersessionid) as \"Conversions\" from usersession where useraction.application=\"EasyTravel\" and useraction.name=\"click on login\" and userExperienceScore=\"SATISFIED\" and usersession.doubleProperties.revenue>0",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 722,
+        "left": 266,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "-24h-2h to -24h",
+        "managementZone": null
+      },
+      "customName": "Lost Revenue",
+      "query": "select sum(usersession.doubleProperties.revenue) as \"Lost Revenue\" FROM usersession where useraction.application=\"EasyTravel\" and not useraction.name=\"click on login\"",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "DTAQL",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 570,
+        "left": 1216,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "-24h-2h to -24h",
+        "managementZone": null
+      },
+      "customName": "Frustrated Users",
+      "query": "select count(usersessionid) as \"Conversions\" from usersession where useraction.application=\"EasyTravel\" and useraction.name=\"click on login\" and userExperienceScore=\"FRUSTRATED\" and usersession.doubleProperties.revenue>0",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 722,
+        "left": 38,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "-24h-2h to -24h",
+        "managementZone": null
+      },
+      "customName": "Risk Revenue",
+      "query": "select sum(usersession.doubleProperties.revenue) as \"Risk Revenue\" FROM usersession where useraction.application=\"EasyTravel\" and useraction.name=\"click on login\" and (userExperienceScore =\"TOLERATED\" or userExperienceScore =\"FRUSTRATED\" or userExperienceScore =\"UNDEFINED\")",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "DTAQL",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 570,
+        "left": 988,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "-24h-2h to -24h",
+        "managementZone": null
+      },
+      "customName": "Tolerated Users",
+      "query": "select count(usersessionid) as \"Conversions\" from usersession where useraction.application=\"EasyTravel\" and useraction.name=\"click on login\" and userExperienceScore=\"TOLERATED\" and usersession.doubleProperties.revenue>0",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "DTAQL",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 722,
+        "left": 988,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "-24h-2h to -24h",
+        "managementZone": null
+      },
+      "customName": "Tolerated Users",
+      "query": "select count(usersessionid) as \"Abandons\" from usersession where useraction.application=\"EasyTravel\" and useraction.name=\"click on login\" and not useraction.name=\"click on login\" and userExperienceScore=\"TOLERATED\" and usersession.doubleProperties.revenue>0",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 570,
+        "left": 1482,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "-24h-2h to -24h",
+        "managementZone": null
+      },
+      "customName": "Duration",
+      "query": "select avg(useraction.duration) as \"Duration\" from useraction where useraction.application=\"EasyTravel\"",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 570,
+        "left": 266,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "-24h-2h to -24h",
+        "managementZone": null
+      },
+      "customName": "New User Revenue",
+      "query": "select sum(usersession.doubleProperties.revenue) as \"Revenue\" FROM usersession where useraction.application=\"EasyTravel\" and useraction.name=\"click on login\" and useraction.name=\"click on login\" and newUser IS true",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "DTAQL",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 722,
+        "left": 1216,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "-24h-2h to -24h",
+        "managementZone": null
+      },
+      "customName": "Frustrated Users",
+      "query": "select count(usersessionid) as \"Abandons\" from usersession where useraction.application=\"EasyTravel\" and useraction.name=\"click on login\" and not useraction.name=\"click on login\" and userExperienceScore=\"FRUSTRATED\" and usersession.doubleProperties.revenue>0",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "DTAQL",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 722,
+        "left": 760,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "-24h-2h to -24h",
+        "managementZone": null
+      },
+      "customName": "Satisfied Users",
+      "query": "select count(usersessionid) as \"Abandons\" from usersession where useraction.application=\"EasyTravel\" and useraction.name=\"click on login\" and not useraction.name=\"click on login\" and userExperienceScore=\"SATISFIED\" and usersession.doubleProperties.revenue>0",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 722,
+        "left": 1482,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "-24h-2h to -24h",
+        "managementZone": null
+      },
+      "customName": "Errors",
+      "query": "select sum(useraction.errorCount) as \"Errors\" from useraction where useraction.application=\"EasyTravel\"",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "__________________________________________________________________________________________________________________________________________________________________________________________________________________________________________",
+      "tileType": "HEADER",
+      "configured": true,
+      "bounds": {
+        "top": 494,
+        "left": 38,
+        "width": 1748,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      }
+    },
+    {
+      "name": "EasyTravel  -24h-2h to -24h",
+      "tileType": "HEADER",
+      "configured": true,
+      "bounds": {
+        "top": 456,
+        "left": 38,
+        "width": 912,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      }
+    },
+    {
+      "name": "EasyTravel Book Travel Journey Last 2 hours",
+      "tileType": "HEADER",
+      "configured": true,
+      "bounds": {
+        "top": 0,
+        "left": 38,
+        "width": 912,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      }
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 114,
+        "left": 494,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "Last 2 hours",
+        "managementZone": null
+      },
+      "customName": "Average Order Value",
+      "query": "select avg(usersession.doubleProperties.revenue) as \"Average Order Value\" FROM usersession where useraction.application=\"EasyTravel\"  and (useraction.name=\"loading of page /orange-booking-finish.jsf\")",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 570,
+        "left": 494,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "-24h-2h to -24h",
+        "managementZone": null
+      },
+      "customName": "Average Order Value",
+      "query": "select avg(usersession.doubleProperties.revenue) as \"Average Order Value\" FROM usersession where useraction.application=\"EasyTravel\" and useraction.name=\"click on login\"",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 266,
+        "left": 494,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "Last 2 hours",
+        "managementZone": null
+      },
+      "customName": "Average Lost Order Value",
+      "query": "select avg(usersession.doubleProperties.revenue) as \"Average Lost Order Value\" FROM usersession where useraction.application=\"EasyTravel\"  and not (useraction.name=\"loading of page /orange-booking-finish.jsf\")",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic",
+      "limit": 50
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 114,
+        "left": 266,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "-2h",
+        "managementZone": null
+      },
+      "customName": "New User Revenue",
+      "query": "select sum(usersession.doubleProperties.revenue) as \"Revenue\" FROM usersession where useraction.application=\"EasyTravel\" and useraction.name=\"click on login\" and useraction.name=\"click on login\" and newUser IS true",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "Revenue",
+      "tileType": "HEADER",
+      "configured": true,
+      "bounds": {
+        "top": 76,
+        "left": 38,
+        "width": 304,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      }
+    },
+    {
+      "name": "Conversions & Abandons",
+      "tileType": "HEADER",
+      "configured": true,
+      "bounds": {
+        "top": 76,
+        "left": 760,
+        "width": 456,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      }
+    },
+    {
+      "name": "Performance",
+      "tileType": "HEADER",
+      "configured": true,
+      "bounds": {
+        "top": 76,
+        "left": 1482,
+        "width": 228,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      }
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 722,
+        "left": 494,
+        "width": 228,
+        "height": 152
+      },
+      "tileFilter": {
+        "timeframe": "-24h-2h to -24h",
+        "managementZone": null
+      },
+      "customName": "Average Lost Order Value",
+      "query": "select avg(usersession.doubleProperties.revenue) as \"Average Lost Order Value\" FROM usersession where useraction.application=\"EasyTravel\"  and not (useraction.name=\"loading of page /orange-booking-finish.jsf\")",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic",
+      "limit": 50
+    },
+    {
+      "name": "Revenue",
+      "tileType": "HEADER",
+      "configured": true,
+      "bounds": {
+        "top": 532,
+        "left": 38,
+        "width": 304,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      }
+    },
+    {
+      "name": "Conversions & Abandons",
+      "tileType": "HEADER",
+      "configured": true,
+      "bounds": {
+        "top": 532,
+        "left": 760,
+        "width": 456,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      }
+    },
+    {
+      "name": "Performance",
+      "tileType": "HEADER",
+      "configured": true,
+      "bounds": {
+        "top": 532,
+        "left": 1482,
+        "width": 228,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      }
+    },
+    {
+      "name": "__________________________________________________________________________________________________________________________________________________________________________________________________________________________________________",
+      "tileType": "HEADER",
+      "configured": true,
+      "bounds": {
+        "top": 38,
+        "left": 38,
+        "width": 1748,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      }
+    }
+  ]
+}

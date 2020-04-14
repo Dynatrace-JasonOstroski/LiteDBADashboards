@@ -1,0 +1,588 @@
+{
+  "metadata": {
+    "configurationVersions": [
+      3
+    ],
+    "clusterVersion": "1.190.86.20200331-160833"
+  },
+  "id": "bbbbbbbb-0001-0001-0000-000000000000",
+  "dashboardMetadata": {
+    "name": "🎬 EasyTravel App Overview",
+    "shared": true,
+    "owner": "jason.ostroski@dynatrace.com",
+    "sharingDetails": {
+      "linkShared": true,
+      "published": false
+    },
+    "dashboardFilter": {
+      "timeframe": "l_2_HOURS",
+      "managementZone": null
+    }
+  },
+  "tiles": [
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 684,
+        "left": 0,
+        "width": 266,
+        "height": 114
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "customName": " ",
+      "query": "select count(usersessionid) as \"Satisfied Users\" from usersession where useraction.application=\"EasyTravel\"  and userExperienceScore=\"SATISFIED\"",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "DTAQL",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 684,
+        "left": 266,
+        "width": 266,
+        "height": 114
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "customName": " ",
+      "query": "select count(usersessionid) as \"Tolerated Users\" from usersession where useraction.application=\"EasyTravel\"  and userExperienceScore=\"TOLERATED\"",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "DTAQL",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 684,
+        "left": 532,
+        "width": 266,
+        "height": 114
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "customName": " ",
+      "query": "select count(usersessionid) as \"Frustrated Users\" from usersession where useraction.application=\"EasyTravel\"  and userExperienceScore=\"FRUSTRATED\"",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 304,
+        "left": 0,
+        "width": 532,
+        "height": 380
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "customName": "Duration",
+      "query": "select useraction.application,percentile(useraction.duration,90) as \"90 Percentile\",percentile(useraction.duration,80) as \"80 Percentile\",percentile(useraction.duration,70) as \"70 Percentile\",percentile(useraction.duration,60) as \"60 Percentile\",percentile(useraction.duration,50) as \"50 Percentile\",percentile(useraction.duration,40) as \"40 Percentile\",percentile(useraction.duration,30) as \"30 Percentile\",percentile(useraction.duration,20) as \"20 Percentile\",percentile(useraction.duration,10) as \"10 Percentile\"from usersession where useraction.application=\"EasyTravel\"  group by useraction.application",
+      "type": "COLUMN_CHART",
+      "visualizationConfig": {
+        "hasAxisBucketing": true
+      }
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 304,
+        "left": 570,
+        "width": 494,
+        "height": 380
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "customName": "Visually Complete",
+      "query": "select useraction.application,percentile(useraction.visuallycompletetime,90) as \"90 Percentile\",percentile(useraction.visuallycompletetime,80) as \"80 Percentile\",percentile(useraction.visuallycompletetime,70) as \"70 Percentile\",percentile(useraction.visuallycompletetime,60) as \"60 Percentile\",percentile(useraction.visuallycompletetime,50) as \"50 Percentile\",percentile(useraction.visuallycompletetime,40) as \"40 Percentile\",percentile(useraction.visuallycompletetime,30) as \"30 Percentile\",percentile(useraction.visuallycompletetime,20) as \"20 Percentile\",percentile(useraction.visuallycompletetime,10) as \"10 Percentile\"from usersession where useraction.application=\"EasyTravel\"  group by useraction.application",
+      "type": "COLUMN_CHART",
+      "visualizationConfig": {
+        "hasAxisBucketing": true
+      }
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 304,
+        "left": 1102,
+        "width": 532,
+        "height": 380
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "customName": "Speed Index",
+      "query": "select useraction.application,percentile(useraction.speedindex,90) as \"90 Percentile\",percentile(useraction.speedindex,80) as \"80 Percentile\",percentile(useraction.speedindex,70) as \"70 Percentile\",percentile(useraction.speedindex,60) as \"60 Percentile\",percentile(useraction.speedindex,50) as \"50 Percentile\",percentile(useraction.speedindex,40) as \"40 Percentile\",percentile(useraction.speedindex,30) as \"30 Percentile\",percentile(useraction.speedindex,20) as \"20 Percentile\",percentile(useraction.speedindex,10) as \"10 Percentile\"from usersession where useraction.application=\"EasyTravel\"  group by useraction.application",
+      "type": "COLUMN_CHART",
+      "visualizationConfig": {
+        "hasAxisBucketing": true
+      }
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 684,
+        "left": 836,
+        "width": 266,
+        "height": 114
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "customName": " ",
+      "query": "select PERCENTILE(duration,90) as \"Duration 90th Percentile\" from useraction where useraction.application=\"EasyTravel\"",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 684,
+        "left": 1102,
+        "width": 266,
+        "height": 114
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "customName": " ",
+      "query": "select PERCENTILE(visuallyCompleteTime,90) as \"Visually Complete 90th Percentile\" from useraction where useraction.application=\"EasyTravel\"",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 684,
+        "left": 1368,
+        "width": 266,
+        "height": 114
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "customName": " ",
+      "query": "select PERCENTILE(speedIndex,90) as \"Speed Index 90th Percentile\" from useraction where useraction.application=\"EasyTravel\"",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "Markdown",
+      "tileType": "MARKDOWN",
+      "configured": true,
+      "bounds": {
+        "top": 836,
+        "left": 266,
+        "width": 266,
+        "height": 494
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "markdown": "![Compare Links1]()\n## [Release Validation](#dashboard;id=bbbbbbbb-0001-0001-0000-000000000016)"
+    },
+    {
+      "name": "User behavior",
+      "tileType": "SESSION_METRICS",
+      "configured": true,
+      "bounds": {
+        "top": 0,
+        "left": 342,
+        "width": 304,
+        "height": 304
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "assignedEntities": [
+        "APPLICATION-4C0BF00879B1D844"
+      ]
+    },
+    {
+      "name": "User breakdown",
+      "tileType": "USERS",
+      "configured": true,
+      "bounds": {
+        "top": 0,
+        "left": 988,
+        "width": 304,
+        "height": 304
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "assignedEntities": [
+        "APPLICATION-4C0BF00879B1D844"
+      ]
+    },
+    {
+      "name": "JavaScript errors",
+      "tileType": "UEM_JSERRORS_OVERALL",
+      "configured": true,
+      "bounds": {
+        "top": 0,
+        "left": 684,
+        "width": 266,
+        "height": 304
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "assignedEntities": [
+        "APPLICATION-4C0BF00879B1D844"
+      ]
+    },
+    {
+      "name": "Web application",
+      "tileType": "APPLICATION",
+      "configured": true,
+      "bounds": {
+        "top": 0,
+        "left": 1330,
+        "width": 304,
+        "height": 304
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "assignedEntities": [
+        "APPLICATION-4C0BF00879B1D844"
+      ]
+    },
+    {
+      "name": "Live user activity",
+      "tileType": "UEM_ACTIVE_SESSIONS",
+      "configured": true,
+      "bounds": {
+        "top": 0,
+        "left": 0,
+        "width": 304,
+        "height": 304
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      }
+    },
+    {
+      "name": "User Journey Links ▼",
+      "tileType": "HEADER",
+      "configured": true,
+      "bounds": {
+        "top": 798,
+        "left": 0,
+        "width": 266,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      }
+    },
+    {
+      "name": "Compare Links ▼",
+      "tileType": "HEADER",
+      "configured": true,
+      "bounds": {
+        "top": 798,
+        "left": 266,
+        "width": 266,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      }
+    },
+    {
+      "name": "User Analysis Links ▼",
+      "tileType": "HEADER",
+      "configured": true,
+      "bounds": {
+        "top": 798,
+        "left": 836,
+        "width": 266,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      }
+    },
+    {
+      "name": "Performance Links ▼",
+      "tileType": "HEADER",
+      "configured": true,
+      "bounds": {
+        "top": 798,
+        "left": 1102,
+        "width": 266,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      }
+    },
+    {
+      "name": "Markdown",
+      "tileType": "MARKDOWN",
+      "configured": true,
+      "bounds": {
+        "top": 988,
+        "left": 836,
+        "width": 266,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "markdown": "## [Browsers](https://wex87152.live.dynatrace.com/#uemapplications/performanceanalysis;uemapplicationId=APPLICATION-4C0BF00879B1D844;visiblepart=browser;a=Browser)"
+    },
+    {
+      "name": "Markdown",
+      "tileType": "MARKDOWN",
+      "configured": true,
+      "bounds": {
+        "top": 1064,
+        "left": 836,
+        "width": 266,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "markdown": "## [User Types](https://wex87152.live.dynatrace.com/#uemapplications/performanceanalysis;uemapplicationId=APPLICATION-4C0BF00879B1D844;visiblepart=usertype;a=Browser)"
+    },
+    {
+      "name": "Markdown",
+      "tileType": "MARKDOWN",
+      "configured": true,
+      "bounds": {
+        "top": 1026,
+        "left": 836,
+        "width": 266,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "markdown": "## [Geolocations](https://wex87152.live.dynatrace.com/#uemapplications/performanceanalysis;uemapplicationId=APPLICATION-4C0BF00879B1D844;visiblepart=worldmap;a=Worldmap)"
+    },
+    {
+      "name": "Markdown",
+      "tileType": "MARKDOWN",
+      "configured": true,
+      "bounds": {
+        "top": 874,
+        "left": 836,
+        "width": 266,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "markdown": "## [Entry Actions](https://wex87152.live.dynatrace.com/#uemapplications/uemvisituseractions;uemapplicationId=APPLICATION-4C0BF00879B1D844;visiblepart=entrypages)"
+    },
+    {
+      "name": "Markdown",
+      "tileType": "MARKDOWN",
+      "configured": true,
+      "bounds": {
+        "top": 912,
+        "left": 836,
+        "width": 266,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "markdown": "## [Exit Actions](https://wex87152.live.dynatrace.com/#uemapplications/uemvisituseractions;uemapplicationId=APPLICATION-4C0BF00879B1D844;visiblepart=exitpages)"
+    },
+    {
+      "name": "Markdown",
+      "tileType": "MARKDOWN",
+      "configured": true,
+      "bounds": {
+        "top": 874,
+        "left": 1102,
+        "width": 266,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "markdown": "## [Frontend Metrics](https://wex87152.live.dynatrace.com/#uemapplications/performanceanalysis;uemapplicationId=APPLICATION-4C0BF00879B1D844;visiblepart=contributors;filtr3facttyp=Load;contribution=p50;metric=V)"
+    },
+    {
+      "name": "Markdown",
+      "tileType": "MARKDOWN",
+      "configured": true,
+      "bounds": {
+        "top": 950,
+        "left": 1102,
+        "width": 266,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "markdown": "## [Errors](https://wex87152.live.dynatrace.com/#uemapplications/performanceanalysis;uemapplicationId=APPLICATION-4C0BF00879B1D844;visiblepart=errors;a=JavascriptErrors;errortype=HTTP)"
+    },
+    {
+      "name": "Markdown",
+      "tileType": "MARKDOWN",
+      "configured": true,
+      "bounds": {
+        "top": 912,
+        "left": 1102,
+        "width": 266,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "markdown": "## [Resources](https://wex87152.live.dynatrace.com/#uemapplications/uemcompareoverview;uemapplicationId=APPLICATION-4C0BF00879B1D844;visiblepart=resources;resType=%20)"
+    },
+    {
+      "name": "Markdown",
+      "tileType": "MARKDOWN",
+      "configured": true,
+      "bounds": {
+        "top": 836,
+        "left": 836,
+        "width": 266,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "markdown": "## [APDEX](https://wex87152.live.dynatrace.com/#uemapplications/uemcompareoverview;uemapplicationId=APPLICATION-4C0BF00879B1D844;visiblepart=apdex)"
+    },
+    {
+      "name": "Markdown",
+      "tileType": "MARKDOWN",
+      "configured": true,
+      "bounds": {
+        "top": 988,
+        "left": 1102,
+        "width": 266,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "markdown": "## [Service Flow](https://wex87152.live.dynatrace.com/#serviceflow;sci=APPLICATION-4C0BF00879B1D844)"
+    },
+    {
+      "name": "Markdown",
+      "tileType": "MARKDOWN",
+      "configured": true,
+      "bounds": {
+        "top": 836,
+        "left": 1102,
+        "width": 266,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "markdown": "## [User Action Performance](https://wex87152.live.dynatrace.com/#uemapplications/performanceanalysis;uemapplicationId=APPLICATION-4C0BF00879B1D844;visiblepart=action)"
+    },
+    {
+      "name": "Markdown",
+      "tileType": "MARKDOWN",
+      "configured": true,
+      "bounds": {
+        "top": 950,
+        "left": 836,
+        "width": 266,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "markdown": "## [Bounces](https://wex87152.live.dynatrace.com/#uemapplications/uemvisitcompareoverview;uemapplicationId=APPLICATION-4C0BF00879B1D844;visiblepart=visitBounces)"
+    },
+    {
+      "name": "Markdown",
+      "tileType": "MARKDOWN",
+      "configured": true,
+      "bounds": {
+        "top": 0,
+        "left": 1634,
+        "width": 38,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "markdown": "## [⇦](#dashboard;id=bbbbbbbb-0001-0000-0000-000000000000)"
+    },
+    {
+      "name": "Markdown",
+      "tileType": "MARKDOWN",
+      "configured": true,
+      "bounds": {
+        "top": 836,
+        "left": 0,
+        "width": 266,
+        "height": 494
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "markdown": "![Funnel Links1]()\n## [Book Travel Journey Overview](#dashboard;id=bbbbbbbb-0001-0001-0001-000000000000)\n![]()\n"
+    }
+  ]
+}

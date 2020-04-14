@@ -1,0 +1,387 @@
+{
+  "metadata": {
+    "configurationVersions": [
+      3
+    ],
+    "clusterVersion": "1.190.86.20200331-160833"
+  },
+  "id": "bbbbbbbb-0001-0000-0000-000000000000",
+  "dashboardMetadata": {
+    "name": "🚀  Tenant Overview",
+    "shared": true,
+    "owner": "jason.ostroski@dynatrace.com",
+    "sharingDetails": {
+      "linkShared": true,
+      "published": true
+    },
+    "dashboardFilter": {
+      "timeframe": "l_2_HOURS",
+      "managementZone": null
+    }
+  },
+  "tiles": [
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 304,
+        "left": 0,
+        "width": 532,
+        "height": 380
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "customName": "Duration",
+      "query": "select DISTINCT DATETIME(starttime, \"HH:mm\", \"10m\") as \"Time\", avg(useraction.duration) as \"Duration\" from useraction",
+      "type": "COLUMN_CHART",
+      "visualizationConfig": {
+        "hasAxisBucketing": true
+      }
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 304,
+        "left": 570,
+        "width": 532,
+        "height": 380
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "customName": "Visually Complete",
+      "query": "select DISTINCT DATETIME(starttime, \"HH:mm\", \"10m\") as \"Time\", AVG(visuallyCompleteTime) as \"Visually Complete\" from useraction",
+      "type": "COLUMN_CHART",
+      "visualizationConfig": {
+        "hasAxisBucketing": true
+      }
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 304,
+        "left": 1140,
+        "width": 532,
+        "height": 380
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "customName": "Speed Index",
+      "query": "select DISTINCT DATETIME(starttime, \"HH:mm\", \"10m\") as \"Time\", AVG(speedIndex) as \"Speed Index\" from useraction",
+      "type": "COLUMN_CHART",
+      "visualizationConfig": {
+        "hasAxisBucketing": true
+      }
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 684,
+        "left": 0,
+        "width": 266,
+        "height": 114
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "customName": " ",
+      "query": "select count(usersessionid) as \"Satisfied Users\" from usersession where userExperienceScore=\"SATISFIED\"",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "DTAQL",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 684,
+        "left": 266,
+        "width": 266,
+        "height": 114
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "customName": " ",
+      "query": "select count(usersessionid) as \"Tolerated Users\" from usersession where userExperienceScore=\"TOLERATED\"",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "DTAQL",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 684,
+        "left": 532,
+        "width": 266,
+        "height": 114
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "customName": " ",
+      "query": "select count(usersessionid) as \"Frustrated Users\" from usersession where userExperienceScore=\"FRUSTRATED\"",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 684,
+        "left": 874,
+        "width": 266,
+        "height": 114
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "customName": " ",
+      "query": "select PERCENTILE(duration,90) as \"Duration 90th Percentile\" from useraction",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 684,
+        "left": 1140,
+        "width": 266,
+        "height": 114
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "customName": " ",
+      "query": "select PERCENTILE(visuallyCompleteTime,90) as \"Visually Complete 90th Percentile\" from useraction",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "User Sessions Query",
+      "tileType": "DTAQL",
+      "configured": true,
+      "bounds": {
+        "top": 684,
+        "left": 1406,
+        "width": 266,
+        "height": 114
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "customName": " ",
+      "query": "select PERCENTILE(speedIndex,90) as \"Speed Index 90th Percentile\" from useraction",
+      "type": "SINGLE_VALUE",
+      "timeFrameShift": "dynamic"
+    },
+    {
+      "name": "Live user activity",
+      "tileType": "UEM_ACTIVE_SESSIONS",
+      "configured": true,
+      "bounds": {
+        "top": 0,
+        "left": 0,
+        "width": 304,
+        "height": 304
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      }
+    },
+    {
+      "name": "Application health",
+      "tileType": "APPLICATIONS",
+      "configured": true,
+      "bounds": {
+        "top": 0,
+        "left": 1368,
+        "width": 304,
+        "height": 304
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "filterConfig": null,
+      "chartVisible": true
+    },
+    {
+      "name": "Top web applications",
+      "tileType": "APPLICATIONS_MOST_ACTIVE",
+      "configured": true,
+      "bounds": {
+        "top": 0,
+        "left": 684,
+        "width": 304,
+        "height": 304
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      }
+    },
+    {
+      "name": "",
+      "tileType": "CUSTOM_CHARTING",
+      "configured": true,
+      "bounds": {
+        "top": 0,
+        "left": 342,
+        "width": 304,
+        "height": 304
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "filterConfig": {
+        "type": "MIXED",
+        "customName": "Active sessions",
+        "defaultName": "Custom chart",
+        "chartConfig": {
+          "legendShown": true,
+          "type": "TOP_LIST",
+          "series": [
+            {
+              "metric": "builtin:apps.web.activeSessions",
+              "aggregation": "NONE",
+              "percentile": null,
+              "type": "LINE",
+              "entityType": "APPLICATION",
+              "dimensions": [
+                {
+                  "id": "0",
+                  "name": "Application",
+                  "values": [],
+                  "entityDimension": true
+                }
+              ],
+              "sortAscending": false,
+              "sortColumn": true,
+              "aggregationRate": "TOTAL"
+            }
+          ],
+          "resultMetadata": {}
+        },
+        "filtersPerEntityType": {}
+      }
+    },
+    {
+      "name": "",
+      "tileType": "CUSTOM_CHARTING",
+      "configured": true,
+      "bounds": {
+        "top": 0,
+        "left": 1026,
+        "width": 304,
+        "height": 304
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "filterConfig": {
+        "type": "MIXED",
+        "customName": "Session duration",
+        "defaultName": "Custom chart",
+        "chartConfig": {
+          "legendShown": true,
+          "type": "TOP_LIST",
+          "series": [
+            {
+              "metric": "builtin:apps.web.sessionDuration",
+              "aggregation": "AVG",
+              "percentile": null,
+              "type": "LINE",
+              "entityType": "APPLICATION",
+              "dimensions": [
+                {
+                  "id": "0",
+                  "name": "Application",
+                  "values": [],
+                  "entityDimension": true
+                }
+              ],
+              "sortAscending": false,
+              "sortColumn": true,
+              "aggregationRate": "TOTAL"
+            }
+          ],
+          "resultMetadata": {}
+        },
+        "filtersPerEntityType": {}
+      }
+    },
+    {
+      "name": "Markdown",
+      "tileType": "MARKDOWN",
+      "configured": true,
+      "bounds": {
+        "top": 798,
+        "left": 1406,
+        "width": 266,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "markdown": "## [Dashboard List](#dashboards)"
+    },
+    {
+      "name": "Markdown",
+      "tileType": "MARKDOWN",
+      "configured": true,
+      "bounds": {
+        "top": 836,
+        "left": 0,
+        "width": 266,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      },
+      "markdown": "## [EasyTravel App Overview](#dashboard;id=bbbbbbbb-0001-0001-0000-000000000000)\n"
+    },
+    {
+      "name": " Application Links ▼",
+      "tileType": "HEADER",
+      "configured": true,
+      "bounds": {
+        "top": 798,
+        "left": 0,
+        "width": 266,
+        "height": 38
+      },
+      "tileFilter": {
+        "timeframe": null,
+        "managementZone": null
+      }
+    }
+  ]
+}
